@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Limelight&family=Figtree:wght@500;700;800&display=swap");
+
+.rl {
+  --felt: #0b4a32; --felt2: #073624; --brass: #d9a441; --ivory: #f6ecd4; --ink: #12040a;
+  display: grid; grid-template-columns: minmax(0, 440px) minmax(0, 1fr); gap: 28px; align-items: start;
+  max-width: 1080px; margin: 0 auto; padding: 24px 18px; color: var(--ivory);
+  font: 500 16px/1.4 Figtree, system-ui, sans-serif; box-sizing: border-box;
+  background:
+    repeating-linear-gradient(45deg, rgba(255,255,255,.015) 0 2px, transparent 2px 4px),
+    radial-gradient(circle at 50% 0, #0f6444, var(--felt2) 70%, #031d13);
+  border: 10px solid #3a1a0a; border-radius: 18px; box-shadow: 0 0 0 3px var(--brass), 0 20px 50px rgba(0,0,0,.5);
+}
+.rl *, .rl *::before, .rl *::after { box-sizing: border-box; }
+
+.rl-left { display: grid; gap: 14px; justify-items: center; }
+.rl-canvas { display: block; filter: drop-shadow(0 14px 18px rgba(0,0,0,.55)); }
+.rl-verdict { width: 100%; min-height: 84px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; background: #041f15; border: 2px solid var(--brass); border-radius: 6px; }
+.rl-verdict b { font: 400 1.4rem Limelight, Georgia, serif; }
+.rl-verdict.win { background: #13795b; border-color: var(--ivory); animation: rl-pop .5s ease; }
+.rl-verdict.lose { background: #3a0b16; }
+.rl-verdict.push { background: #3b3320; }
+@keyframes rl-pop { 40% { transform: scale(1.04); } }
+.rl-hist { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; min-height: 34px; }
+.rl-pill { min-width: 34px; padding: 4px 8px; text-align: center; font-weight: 800; border: 2px solid var(--ivory); border-radius: 999px; }
+
+.rl-right { display: grid; gap: 14px; min-width: 0; }
+.rl-bank { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 16px; color: var(--ink); background: var(--ivory); border-radius: 6px; font-weight: 700; }
+.rl-bank b { font: 400 2.1rem Limelight, Georgia, serif; font-variant-numeric: tabular-nums; }
+.rl-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.rl-chip { width: 54px; height: 54px; color: #fff; background: var(--c); font: 800 .95rem Figtree, sans-serif; border: 4px dashed var(--ivory); border-radius: 50%; box-shadow: 0 3px 0 rgba(0,0,0,.6); cursor: pointer; }
+.rl-chip[aria-pressed="true"] { transform: translateY(-4px); box-shadow: 0 7px 0 rgba(0,0,0,.6), 0 0 0 3px var(--brass); }
+.rl-chip:disabled, .rl-cell:disabled { cursor: not-allowed; }
+
+.rl-board { overflow-x: auto; padding: 8px 4px; }
+.rl-grid { display: grid; grid-template-columns: 44px repeat(12, minmax(34px, 1fr)); gap: 3px; min-width: 520px; }
+.rl-cell { position: relative; min-height: 42px; padding: 0; color: #fff; background: #14110f; font: 800 1rem Figtree, sans-serif; border: 2px solid var(--ivory); border-radius: 4px; cursor: pointer; }
+.rl-cell.r { background: #b3122a; }
+.rl-cell.g { background: #13795b; grid-row: span 3; }
+.rl-cell.out { min-height: 40px; font-size: .9rem; }
+.rl-cell.out:not(.r) { background: transparent; }
+.rl-cell.s4 { grid-column: span 4; }
+.rl-cell.s2 { grid-column: span 2; }
+.rl-bd { position: absolute; top: -8px; right: -5px; z-index: 1; min-width: 22px; padding: 1px 5px; color: var(--ink); background: var(--brass); font: 800 .7rem Figtree, sans-serif; border: 2px solid var(--ink); border-radius: 999px; }
+.rl-cell:focus-visible, .rl-chip:focus-visible, .rl-btn:focus-visible { outline: 3px solid var(--brass); outline-offset: 2px; }
+
+.rl-err { min-height: 1.2em; margin: 0; color: #ffb3be; font-weight: 700; }
+.rl-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.rl-btn { padding: 12px 16px; color: var(--ivory); background: none; font: 800 .95rem Figtree, sans-serif; border: 2px solid rgba(255,255,255,.35); border-radius: 6px; cursor: pointer; }
+.rl-btn:disabled { opacity: .4; cursor: not-allowed; }
+.rl-spin { flex: 1; min-width: 160px; padding: 14px; color: var(--ink); background: linear-gradient(#f6d27c, #c28a22); font: 400 1.3rem Limelight, Georgia, serif; border: 0; box-shadow: 0 5px 0 #6b4709; }
+.rl-spin:disabled { opacity: 1; filter: grayscale(.8) brightness(.7); }
+.rl-note { margin: 0; font-size: .85rem; opacity: .75; }
+
+@media (max-width: 860px) { .rl { grid-template-columns: minmax(0, 1fr); } }
+@media (prefers-reduced-motion: reduce) { .rl-verdict.win { animation: none; } }
